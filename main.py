@@ -2,9 +2,21 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 import seaborn as sns
 from scipy import stats
-import koreanize_matplotlib  # 리눅스/스트림릿 클라우드 한글 폰트 자동 설정
+import os
+
+# 리눅스(스트림릿 클라우드) 및 로컬 환경 한글 폰트 설정
+font_path = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'
+if os.path.exists(font_path):
+    fm.fontManager.addfont(font_path)
+    plt.rc('font', family='NanumGothic')
+else:
+    # 로컬 PC(Windows/Mac) 실행 시 대비
+    plt.rc('font', family=['Malgun Gothic', 'AppleGothic', 'sans-serif'])
+
+plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
 
 # 페이지 기본 설정
 st.set_page_config(
